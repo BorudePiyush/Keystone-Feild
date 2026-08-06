@@ -4,4 +4,10 @@
   "password" : "Sonu-231",
   "role" : "CUSTOMER",
   "timestamp" : "2026-07-10T15:01:44.520204400"
+}, {
+  "name" : "Piyush Sanjay Borude",
+  "email" : "borudepiyush847@gmail.com",
+  "password" : "Piyu@2004",
+  "role" : "TECHNICIAN",
+  "timestamp" : "2026-08-06T15:16:16.987054700"
 } ]

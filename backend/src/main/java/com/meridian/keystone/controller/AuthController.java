@@ -28,7 +28,6 @@ public class AuthController {
 
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -63,6 +62,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public JwtResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+    
+
         String cleanEmail = loginRequest.getEmail() != null ? loginRequest.getEmail().trim() : "";
         User user = userRepository.findByEmailIgnoreCase(cleanEmail)
                 .orElseGet(() -> userRepository.findByEmail(cleanEmail)

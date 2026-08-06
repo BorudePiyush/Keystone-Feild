@@ -14,30 +14,36 @@
 ## 🌟 Key Features & Capabilities
 
 ### 📊 1. Executive Operations Dashboard
+
 - **Dynamic SLA Compliance Engine:** Automatically calculates real-time SLA compliance percentages based on priority deadlines (`EMERGENCY`: 4h, `HIGH`: 12h, `MEDIUM`: 24h, `LOW`: 48h) and completion timestamps.
 - **Live KPI Analytics:** Instant visibility into Total Work Orders, Active Tickets, Completed Jobs, Overdue Breaches, and On-Duty Staff metrics.
 - **Glassmorphic Space Aesthetics:** Glowing neon cards, animated floating background blobs, and tactile hover states.
 
 ### 📋 2. Kanban Work Order Lifecycle Management
+
 - **Visual Work Order Board:** Manage tickets across 6 distinct statuses (`NEW`, `ASSIGNED`, `IN_PROGRESS`, `ON_HOLD`, `COMPLETED`, `CLOSED`).
 - **State Machine Integrity:** Enforces valid lifecycle transitions on backend and frontend.
 - **Technician Dispatch:** Assign work orders to available technicians with real-time role filtering.
 
 ### 🗺️ 3. GIS Live Staff Tracking Radar Map
+
 - **Leaflet Interactive Map:** Dark-themed GIS map rendering precise geolocated coordinates of on-duty field staff and facility sites.
 - **Auto-Fit Spatial Bounds:** Dynamically centers and zooms to fit technician GPS check-ins across global coordinates.
 - **Duty Telemetry:** Technicians toggle duty status with live HTML5 Geolocation API check-ins (`navigator.geolocation`).
 
 ### 👤 4. Customer Self-Service Care Portal
+
 - **Service Request Submission:** Customers can raise maintenance tickets, select registered facility locations (`HQ Office Tower`, `Downtown Plaza`, etc.), and set priority levels.
 - **Live Ticket Tracking:** Real-time timeline view of request progress and technician assignments.
 
 ### 📱 5. Technician Field Workspace
+
 - **Job Timers & Labor Logs:** Record actual working hours and notes for completed tasks.
 - **Parts & Inventory Tracking:** Track spare parts consumption with automatic inventory decrementing.
 - **Expense Loggers:** Submit field expenses (fuel, travel, tools) tied directly to work orders.
 
 ### 🔐 6. Authentication & User Profile Management
+
 - **Flexible Auth Modes:** Support for standard Password Login and 6-digit OTP verification codes.
 - **Quick Login Demo Accounts:** One-click role buttons on the login screen for instant role testing.
 - **Profile & History Timelines:** Manage personal details, photo avatars, and review individual work history logs.
@@ -47,6 +53,7 @@
 ## 🛠️ Technology Stack
 
 ### Backend Infrastructure
+
 - **Framework:** Spring Boot 3.3.1 (Java 21)
 - **Security:** Spring Security with Stateless JWT Authentication & BCrypt Password Hashing
 - **ORM & Data Access:** Spring Data JPA / Hibernate (with `EAGER` entity fetching for Jackson JSON serialization safety)
@@ -54,6 +61,7 @@
 - **Database:** H2 Database Engine (Local persistent file mode: `./postgres-data/keystonedb.mv.db`) / PostgreSQL ready
 
 ### Frontend Architecture
+
 - **Framework:** React 18 with TypeScript & Vite
 - **UI & Styling:** Vanilla CSS Design System featuring Glassmorphic Tokens, Radial Meshes, and Fluid Animations
 - **Icons & Mapping:** Lucide React Icons & Leaflet GIS Mapping (`leaflet` / `react-leaflet`)
@@ -76,7 +84,8 @@ The application comes pre-seeded with sample role accounts. You can log in using
 ## 🚀 Local Setup & Running Guide
 
 ### Prerequisites
-- **Java Development Kit (JDK 21+)** installed and configured on your `PATH`.
+
+- **Java Development Kit (JDK 21+)** installed. The Windows launcher pins the bundled backend to `C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot`.
 - **Node.js (v18+)** and **npm** installed.
 
 ---
@@ -104,6 +113,7 @@ cd backend
 # Run Spring Boot backend using the embedded Maven wrapper
 ..\.maven\apache-maven-3.9.6\bin\mvn.cmd spring-boot:run
 ```
+
 *(On Linux/macOS, use `./mvnw spring-boot:run`)*
 
 - **Backend API Base URL:** `http://localhost:8080`
@@ -146,7 +156,7 @@ npm run dev
 
 ## 📁 Repository Directory Structure
 
-```
+```text
 Keystone/
 ├── backend/                             # Spring Boot 3 Application
 │   ├── src/main/java/com/meridian/keystone/
