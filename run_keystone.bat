@@ -4,10 +4,10 @@ echo ==========================================================
 echo       Starting Keystone Field Service Management
 echo ==========================================================
 
-set "JAVA_HOME=C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot"
+set "JAVA_HOME=C:\Users\borud\AppData\Local\jdks\jdk-25.0.2"
 if not exist "%JAVA_HOME%\bin\java.exe" (
-	echo JDK 21 was not found at "%JAVA_HOME%".
-	echo Please install it there or update run_keystone.bat with your local JDK 21 path.
+	echo JDK 25 was not found at "%JAVA_HOME%".
+	echo Please install it there or update run_keystone.bat with your local JDK 25 path.
 	pause
 	exit /b 1
 )
