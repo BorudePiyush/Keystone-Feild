@@ -73,9 +73,9 @@ export default function LiveTrackingMap({ token }: LiveTrackingMapProps) {
         fadeAnimation: true
       }).setView([20.5937, 78.9629], 5); // Default center: India
 
-      // OpenStreetMap Dark Theme Tiles
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+      // Light theme tiles
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
         subdomains: 'abcd',
         maxZoom: 19
       }).addTo(mapInstanceRef.current);
@@ -107,7 +107,7 @@ export default function LiveTrackingMap({ token }: LiveTrackingMapProps) {
     sites.forEach(site => {
       L.marker([site.lat, site.lng], { icon: siteIcon })
         .bindPopup(`
-          <div style="color: #000; font-family: sans-serif; font-size: 11px;">
+          <div style="color: #0f172a; font-family: sans-serif; font-size: 11px;">
             <strong style="color: #4f46e5; font-size: 12px;">Client Site</strong><br/>
             <strong>Name:</strong> ${site.name}<br/>
             <strong>Address:</strong> ${site.addr}
@@ -136,7 +136,7 @@ export default function LiveTrackingMap({ token }: LiveTrackingMapProps) {
 
       L.marker([tech.latitude, tech.longitude], { icon: techIcon })
         .bindPopup(`
-          <div style="color: #000; font-family: sans-serif; font-size: 11px;">
+          <div style="color: #0f172a; font-family: sans-serif; font-size: 11px;">
             <strong style="color: #059669; font-size: 12px;">Technician Checked-In</strong><br/>
             <strong>Name:</strong> ${tech.name}<br/>
             <strong>Email:</strong> ${tech.email}<br/>
@@ -185,13 +185,13 @@ export default function LiveTrackingMap({ token }: LiveTrackingMapProps) {
             <span>Interactive Operational Radar Zone</span>
           </h3>
 
-          <div style={{ flex: 1, position: 'relative', minHeight: '400px', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+          <div style={{ flex: 1, position: 'relative', minHeight: '400px', borderRadius: '12px', overflow: 'hidden', border: '1px solid rgba(15, 23, 42, 0.08)' }}>
             {!mapLoaded && (
-              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(255,255,255,0.88)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10 }}>
                 <p style={{ color: 'var(--text-muted)' }}>Loading live maps telemetry...</p>
               </div>
             )}
-            <div ref={mapContainerRef} style={{ width: '100%', height: '100%', minHeight: '400px', background: '#0b0f19' }} />
+            <div ref={mapContainerRef} style={{ width: '100%', height: '100%', minHeight: '400px', background: '#edf2ff' }} />
           </div>
         </div>
 
@@ -215,8 +215,8 @@ export default function LiveTrackingMap({ token }: LiveTrackingMapProps) {
                       if (tech.isOnDuty) selectOnlineTech(tech);
                     }}
                     style={{
-                      background: 'rgba(255,255,255,0.02)',
-                      border: selectedTech?.id === tech.id ? '1px solid var(--primary)' : '1px solid rgba(255,255,255,0.04)',
+                      background: selectedTech?.id === tech.id ? 'rgba(124, 140, 255, 0.08)' : 'rgba(255,255,255,0.9)',
+                      border: selectedTech?.id === tech.id ? '1px solid var(--primary)' : '1px solid rgba(15,23,42,0.06)',
                       padding: '0.75rem 1rem',
                       borderRadius: '8px',
                       cursor: tech.isOnDuty ? 'pointer' : 'default',
@@ -232,7 +232,7 @@ export default function LiveTrackingMap({ token }: LiveTrackingMapProps) {
                         <div style={{ 
                           width: '8px', height: '8px', 
                           borderRadius: '50%', 
-                          background: tech.isOnDuty ? 'var(--color-completed)' : 'rgba(255,255,255,0.15)' 
+                          background: tech.isOnDuty ? 'var(--color-completed)' : 'rgba(100,116,139,0.2)' 
                         }} />
                       </div>
                       <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>{tech.phone || 'No Mobile'}</span>
@@ -263,7 +263,7 @@ export default function LiveTrackingMap({ token }: LiveTrackingMapProps) {
                 {selectedTech.avatarUrl ? (
                   <img src={selectedTech.avatarUrl} style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'cover' }} alt="" />
                 ) : (
-                  <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--primary)', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>
+                  <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'linear-gradient(135deg, #7c8cff 0%, #9b7bff 100%)', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>
                     {selectedTech.name.substring(0, 2)}
                   </div>
                 )}
@@ -276,11 +276,11 @@ export default function LiveTrackingMap({ token }: LiveTrackingMapProps) {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span>Location Coordinate:</span>
-                  <span style={{ fontWeight: 600, color: '#ffffff' }}>{selectedTech.latitude?.toFixed(5)}, {selectedTech.longitude?.toFixed(5)}</span>
+                  <span style={{ fontWeight: 600, color: '#0f172a' }}>{selectedTech.latitude?.toFixed(5)}, {selectedTech.longitude?.toFixed(5)}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span>Last Checked In:</span>
-                  <span style={{ fontWeight: 600, color: '#ffffff' }}>
+                  <span style={{ fontWeight: 600, color: '#0f172a' }}>
                     {selectedTech.lastLocationUpdate ? new Date(selectedTech.lastLocationUpdate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'N/A'}
                   </span>
                 </div>

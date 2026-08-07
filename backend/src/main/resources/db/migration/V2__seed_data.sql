@@ -1,11 +1,11 @@
 -- Seed users (password is 'password' for all, BCrypt hashed as $2a$10$/4hFwCJKtxZe05f06uGhmOVIxU9sW5SC61yVsC8SVMUjQG88yMLHS)
 INSERT INTO users (name, email, phone, role, password_hash, avatar_url, is_on_duty, latitude, longitude, last_location_update) VALUES
-('John Manager', 'manager@keystone.com', '+15550001', 'MANAGER', '$2a$10$/4hFwCJKtxZe05f06uGhmOVIxU9sW5SC61yVsC8SVMUjQG88yMLHS', 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&q=80', FALSE, NULL, NULL, NULL),
+('Rakesh Manager', 'manager@keystone.com', '+15550001', 'MANAGER', '$2a$10$/4hFwCJKtxZe05f06uGhmOVIxU9sW5SC61yVsC8SVMUjQG88yMLHS', 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&q=80', FALSE, NULL, NULL, NULL),
 ('Sarah Dispatcher', 'dispatcher@keystone.com', '+15550002', 'DISPATCHER', '$2a$10$/4hFwCJKtxZe05f06uGhmOVIxU9sW5SC61yVsC8SVMUjQG88yMLHS', 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80', FALSE, NULL, NULL, NULL),
 ('Dave Tech (HVAC)', 'tech1@keystone.com', '+15550003', 'TECHNICIAN', '$2a$10$/4hFwCJKtxZe05f06uGhmOVIxU9sW5SC61yVsC8SVMUjQG88yMLHS', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80', TRUE, 40.7128, -74.0060, '2026-07-10 14:00:00'),
-('Mike Tech (Plumbing)', 'tech2@keystone.com', '+15550004', 'TECHNICIAN', '$2a$10$/4hFwCJKtxZe05f06uGhmOVIxU9sW5SC61yVsC8SVMUjQG88yMLHS', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80', TRUE, 42.3601, -71.0589, '2026-07-10 14:00:00'),
-('Alice Customer (Meridian)', 'customer@keystone.com', '+15550005', 'CUSTOMER', '$2a$10$/4hFwCJKtxZe05f06uGhmOVIxU9sW5SC61yVsC8SVMUjQG88yMLHS', 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80', FALSE, NULL, NULL, NULL),
-('Bob Customer (Nexus)', 'customer2@keystone.com', '+15550006', 'CUSTOMER', '$2a$10$/4hFwCJKtxZe05f06uGhmOVIxU9sW5SC61yVsC8SVMUjQG88yMLHS', 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80', FALSE, NULL, NULL, NULL);
+('Mike Tech (Plumbing)', 'tech2@keystone.com', '+15550004', 'TECHNICIAN', '$2a$10$/4hFwCJKtxZe05f06uGhmOVIxU9sW5SC61yVsC8SVMUjQG88yMLHS', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=15０&q=8０', TRUE, 42.36０１, -７１.０５８９, '２０２６－０７－１０ １４：００：００'),
+('Alice Customer (Meridian)', 'customer@keystone.com', '+１５５５０００５', 'CUSTOMER', '$２ａ$１０$/４ｈＦｗＣＪＫｔｘＺｅ０５ｆ０６ｕＧｈｍＯＶＩｘＵ９ｓＷ５ＳＣ６１ｙＶｓＣ８ＳＶＭＵｊＱＧ８８ｙＭＬＨＳ', 'https://images.unsplash.com/photo-１４９４７９０１０８３７７-be９ｃ２９ｂ２９３３０?auto=format&fit=crop&w=１５０&q=８０', FALSE, NULL, NULL, NULL),
+('Bob Customer (Nexus)', 'customer２@keystone.com', '+１５５５０００６', 'CUSTOMER', '$２ａ$１０$/４ｈＦｗＣＪＫｔｘＺｅ０５ｆ０６ｕＧｈｍＯＶＩｘＵ９ｓＷ５ＳＣ６１ｙＶｓＣ８ＳＶＭＵｊＱＧ８８ｙＭＬＨＳ', 'https://images.unsplash.com/photo-１４３８７６１６８１０３３-６４６１ffad８ｄ８₀?auto=format&fit=crop&w=１５０&q=８０', FALSE, NULL, NULL, NULL);
 
 -- Seed customers
 INSERT INTO customers (name, contact_email) VALUES

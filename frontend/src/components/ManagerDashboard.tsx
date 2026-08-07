@@ -118,19 +118,21 @@ export default function ManagerDashboard({ token }: ManagerDashboardProps) {
 
   return (
     <div className="fade-in">
-      <div className="dashboard-header">
+      <section className="dashboard-hero glass-card shimmer-glow">
         <div>
-          <h1 style={{ fontSize: '1.8rem', fontWeight: 700 }}>Meridian Operations Dashboard</h1>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Real-time service indicators and facility compliance</p>
+          <span className="eyebrow">Executive visibility</span>
+          <h2 className="section-title">Meridian Operations Dashboard</h2>
+          <p className="section-copy">Real-time service indicators, SLA performance, and inventory alerts in one place.</p>
         </div>
-        <button onClick={fetchDashboardData} className="btn btn-secondary">
+        <button onClick={fetchDashboardData} className="btn btn-secondary dashboard-refresh">
           <RefreshCw size={16} />
           <span>Refresh Stats</span>
         </button>
-      </div>
+      </section>
 
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '3rem' }}>
+        <div className="loading-state glass-card">
+          <div className="loading-ring" />
           <p style={{ color: 'var(--text-muted)' }}>Loading analytics...</p>
         </div>
       ) : (
@@ -181,8 +183,8 @@ export default function ManagerDashboard({ token }: ManagerDashboardProps) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
             
             {/* Chart: SLA Gauge */}
-            <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem', textAlign: 'center' }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 600, alignSelf: 'flex-start', marginBottom: '1.5rem' }}>SLA Compliance Rate</h3>
+            <div className="glass-card chart-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem', textAlign: 'center' }}>
+              <h3 className="card-title-large" style={{ alignSelf: 'flex-start', marginBottom: '1.5rem' }}>SLA Compliance Rate</h3>
               
               <div style={{ position: 'relative', width: '150px', height: '150px' }}>
                 <svg width="150" height="150" viewBox="0 0 150 150" style={{ transform: 'rotate(-90deg)' }}>
@@ -220,8 +222,8 @@ export default function ManagerDashboard({ token }: ManagerDashboardProps) {
             </div>
 
             {/* Chart: Status distribution */}
-            <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', padding: '1.5rem 2rem' }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '1.5rem' }}>Work Orders by Status</h3>
+            <div className="glass-card chart-card" style={{ display: 'flex', flexDirection: 'column', padding: '1.5rem 2rem' }}>
+              <h3 className="card-title-large" style={{ marginBottom: '1.5rem' }}>Work Orders by Status</h3>
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', flex: 1, justifyContent: 'center' }}>
                 {Object.keys(metrics.statusCounts).map(status => {
@@ -254,8 +256,8 @@ export default function ManagerDashboard({ token }: ManagerDashboardProps) {
           <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1.5rem', flexWrap: 'wrap' }}>
             
             {/* Table: Overdue / Critical Tickets */}
-            <div className="glass-card">
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div className="glass-card panel-card">
+              <h3 className="card-title-large" style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <CalendarDays size={18} style={{ color: 'var(--color-cancelled)' }} />
                 <span>Overdue & Critical Actions</span>
               </h3>
@@ -286,8 +288,8 @@ export default function ManagerDashboard({ token }: ManagerDashboardProps) {
             </div>
 
             {/* Table: Inventory warning */}
-            <div className="glass-card">
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div className="glass-card panel-card">
+              <h3 className="card-title-large" style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Package size={18} style={{ color: 'var(--color-hold)' }} />
                 <span>Inventory Alerts</span>
               </h3>

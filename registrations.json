@@ -10,4 +10,10 @@
   "password" : "Piyu@2004",
   "role" : "TECHNICIAN",
   "timestamp" : "2026-08-06T15:16:16.987054700"
+}, {
+  "name" : "Nishant Borude",
+  "email" : "nishantborude@gmail.com",
+  "password" : "123",
+  "role" : "CUSTOMER",
+  "timestamp" : "2026-08-06T19:50:00.809073300"
 } ]

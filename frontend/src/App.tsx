@@ -18,6 +18,37 @@ interface UserState {
   role: string;
 }
 
+const viewMeta: Record<string, { title: string; subtitle: string }> = {
+  dashboard: {
+    title: 'Operations Command Center',
+    subtitle: 'Live SLA, ticket and inventory intelligence for managers',
+  },
+  board: {
+    title: 'Work Order Control Board',
+    subtitle: 'Track the pipeline from intake to closure',
+  },
+  sites: {
+    title: 'Client Sites',
+    subtitle: 'Manage facilities and customer locations',
+  },
+  tracking: {
+    title: 'Staff Tracking Radar',
+    subtitle: 'Monitor on-duty technicians on the map',
+  },
+  tech: {
+    title: 'Field Technician Workspace',
+    subtitle: 'Review assigned jobs and update work progress',
+  },
+  customer: {
+    title: 'Customer Service Portal',
+    subtitle: 'Submit and monitor maintenance requests',
+  },
+  profile: {
+    title: 'My Profile',
+    subtitle: 'Manage account details and service history',
+  },
+};
+
 export default function App() {
   const [token, setToken] = useState<string | null>(localStorage.getItem('keystone_token'));
   const [user, setUser] = useState<UserState | null>(null);
@@ -103,6 +134,11 @@ export default function App() {
     return <AuthView onLoginSuccess={handleLoginSuccess} />;
   }
 
+  const currentView = viewMeta[activeTab] || {
+    title: 'Welcome to Keystone',
+    subtitle: 'Select a workspace from the sidebar to begin',
+  };
+
   // Sidebar navigation options depending on role
   const getNavLinks = () => {
     const links = [];
@@ -134,6 +170,7 @@ export default function App() {
         <div className="bg-glow-blob bg-glow-blob-2"></div>
         <div className="bg-glow-blob bg-glow-blob-3"></div>
       </div>
+
       {/* Sidebar navigation */}
       <aside className="sidebar">
         <div>
@@ -172,9 +209,9 @@ export default function App() {
             </div>
           </div>
 
-          <button 
-            onClick={handleLogout} 
-            className="btn btn-secondary" 
+          <button
+            onClick={handleLogout}
+            className="btn btn-secondary"
             style={{ width: '100%', justifyContent: 'center', gap: '0.5rem', background: 'rgba(239, 68, 68, 0.1)', color: '#f87171', border: '1px solid rgba(239, 68, 68, 0.15)' }}
           >
             <LogOut size={16} />
@@ -185,6 +222,25 @@ export default function App() {
 
       {/* Main viewport panels */}
       <main className="main-content">
+        <header className="workspace-shell glass-card shimmer-glow">
+          <div className="workspace-copy">
+            <span className="eyebrow">Keystone Field Service Management</span>
+            <h1 className="workspace-title">{currentView.title}</h1>
+            <p className="workspace-subtitle">{currentView.subtitle}</p>
+          </div>
+
+          <div className="workspace-status">
+            <div className="workspace-chip">
+              <span className="workspace-chip-label">Logged in as</span>
+              <strong>{user.name}</strong>
+            </div>
+            <div className="workspace-chip workspace-chip-role">
+              <span className="workspace-chip-label">Role</span>
+              <strong>{user.role.replace('_', ' ')}</strong>
+            </div>
+          </div>
+        </header>
+
         {activeTab === 'dashboard' && <ManagerDashboard token={token} />}
         {activeTab === 'board' && <KanbanBoard token={token} userRole={user.role} />}
         {activeTab === 'sites' && <CustomerSiteManagement token={token} />}

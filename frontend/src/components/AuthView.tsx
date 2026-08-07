@@ -260,600 +260,419 @@ export default function AuthView({ onLoginSuccess }: AuthViewProps) {
   };
 
   return (
-    <div style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minHeight: '100vh',
-      padding: '1rem',
-      position: 'relative'
-    }}>
+    <div className="auth-page">
       {/* Mesh Glow Background */}
       <div className="bg-glow-container">
         <div className="bg-glow-blob bg-glow-blob-1"></div>
         <div className="bg-glow-blob bg-glow-blob-2"></div>
         <div className="bg-glow-blob bg-glow-blob-3"></div>
       </div>
-      <div className="glass-card fade-in" style={{ width: '100%', maxWidth: '450px', padding: '2.5rem' }}>
-        <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-          <div style={{
-            display: 'inline-flex',
-            width: '64px',
-            height: '64px',
-            borderRadius: '16px',
-            background: 'rgba(99, 102, 241, 0.15)',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '1rem',
-            color: '#6366f1',
-            boxShadow: '0 0 15px rgba(99, 102, 241, 0.2)'
-          }}>
-            <Shield size={32} />
+      <div className="auth-shell fade-in">
+        <section className="auth-brand glass-card">
+          <div className="auth-brand-badge">
+            <Shield size={28} />
           </div>
-          <h2 style={{ fontSize: '2rem', fontFamily: 'var(--font-title)', fontWeight: 800 }}>KEYSTONE</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '0.25rem' }}>
-            {isForgotPassword ? 'Reset Your Account Password' : 'Field Service Management Platform'}
+          <span className="eyebrow">Keystone Field Service Management</span>
+          <h2 className="auth-brand-title">Service operations with a command-center feel.</h2>
+          <p className="auth-brand-copy">
+            Dispatch, monitor, and resolve field work from one responsive interface designed for managers,
+            technicians, and customers.
           </p>
-        </div>
 
-        {/* Tab switchers */}
-        {!isForgotPassword && (
-          <div style={{
-            display: 'flex',
-            background: 'rgba(255, 255, 255, 0.03)',
-            borderRadius: '10px',
-            padding: '0.25rem',
-            marginBottom: '1.5rem',
-            border: '1px solid rgba(255,255,255,0.05)'
-          }}>
-            <button
-              type="button"
-              onClick={() => {
-                resetAllTabs();
-              }}
-              style={{
-                flex: 1,
-                padding: '0.6rem',
-                borderRadius: '8px',
-                border: 'none',
-                background: (!isRegister && !useOtp) ? 'var(--primary)' : 'transparent',
-                color: '#ffffff',
-                fontWeight: 600,
-                fontSize: '0.85rem',
-                cursor: 'pointer',
-                transition: 'background 0.3s'
-              }}
-            >
-              Password
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                resetAllTabs();
-                setUseOtp(true);
-              }}
-              style={{
-                flex: 1,
-                padding: '0.6rem',
-                borderRadius: '8px',
-                border: 'none',
-                background: (!isRegister && useOtp) ? 'var(--primary)' : 'transparent',
-                color: '#ffffff',
-                fontWeight: 600,
-                fontSize: '0.85rem',
-                cursor: 'pointer',
-                transition: 'background 0.3s'
-              }}
-            >
-              OTP Login
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                resetAllTabs();
-                setIsRegister(true);
-              }}
-              style={{
-                flex: 1,
-                padding: '0.6rem',
-                borderRadius: '8px',
-                border: 'none',
-                background: isRegister ? 'var(--primary)' : 'transparent',
-                color: '#ffffff',
-                fontWeight: 600,
-                fontSize: '0.85rem',
-                cursor: 'pointer',
-                transition: 'background 0.3s'
-              }}
-            >
-              Register
-            </button>
+          <div className="auth-highlights">
+            <div className="auth-highlight">
+              <strong>Live SLA</strong>
+              <span>Track compliance and urgent tickets in real time.</span>
+            </div>
+            <div className="auth-highlight">
+              <strong>Role-aware</strong>
+              <span>Switch between manager, dispatcher, technician, and customer workflows.</span>
+            </div>
+            <div className="auth-highlight">
+              <strong>Fast login</strong>
+              <span>Use OTP, password, or one-click demo accounts.</span>
+            </div>
           </div>
-        )}
+        </section>
 
-        {error && (
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.75rem',
-            background: 'rgba(239, 68, 68, 0.15)',
-            border: '1px solid rgba(239, 68, 68, 0.3)',
-            borderRadius: '10px',
-            padding: '0.75rem 1rem',
-            marginBottom: '1.5rem',
-            color: '#f87171',
-            fontSize: '0.85rem'
-          }}>
-            <AlertTriangle size={18} style={{ flexShrink: 0 }} />
-            <span>{error}</span>
+        <section className="auth-panel glass-card">
+          <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+            <h1 className="auth-title">{isForgotPassword ? 'Reset password' : 'Welcome back'}</h1>
+            <p className="auth-subtitle">
+              {isForgotPassword ? 'Confirm your identity and choose a new password' : 'Sign in with password, OTP, or a demo account'}
+            </p>
           </div>
-        )}
 
-        {success && (
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.75rem',
-            background: 'rgba(52, 211, 153, 0.15)',
-            border: '1px solid rgba(52, 211, 153, 0.3)',
-            borderRadius: '10px',
-            padding: '0.75rem 1rem',
-            marginBottom: '1.5rem',
-            color: '#34d399',
-            fontSize: '0.85rem'
-          }}>
-            <CheckCircle2 size={18} style={{ flexShrink: 0 }} />
-            <span>{success}</span>
-          </div>
-        )}
-
-        {/* Demo OTP Helper Box */}
-        {(useOtp || isForgotPassword) && otpStep === 2 && demoOtp && (
-          <div style={{
-            background: 'rgba(99, 102, 241, 0.12)',
-            border: '1px solid rgba(99, 102, 241, 0.25)',
-            borderRadius: '10px',
-            padding: '0.85rem',
-            marginBottom: '1.5rem',
-            fontSize: '0.85rem',
-            textAlign: 'center'
-          }}>
-            <span style={{ color: 'var(--text-muted)' }}>Demo Verification Code: </span>
-            <strong style={{ color: '#a5b4fc', fontSize: '1.1rem', letterSpacing: '0.15em', fontFamily: 'monospace' }}>{demoOtp}</strong>
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit}>
-          {isRegister && (
-            <div className="form-group">
-              <label className="form-label" htmlFor="name">
-                Full Name
-              </label>
-              <div style={{ position: 'relative' }}>
-                <User size={18} style={{
-                  position: 'absolute',
-                  left: '12px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  color: 'var(--text-muted)'
-                }} />
-                <input
-                  id="name"
-                  type="text"
-                  className="form-input"
-                  style={{ paddingLeft: '2.5rem', width: '100%' }}
-                  placeholder="John Doe"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
-              </div>
+          {/* Tab switchers */}
+          {!isForgotPassword && (
+            <div className="auth-toggle-group">
+            
+              <button
+                type="button"
+                onClick={() => {
+                  resetAllTabs();
+                }}
+                className={`auth-toggle ${!isRegister && !useOtp ? 'active' : ''}`}
+              >
+                Password
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  resetAllTabs();
+                  setUseOtp(true);
+                }}
+                className={`auth-toggle ${!isRegister && useOtp ? 'active' : ''}`}
+              >
+                OTP Login
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  resetAllTabs();
+                  setIsRegister(true);
+                }}
+                className={`auth-toggle ${isRegister ? 'active' : ''}`}
+              >
+                Register
+              </button>
             </div>
           )}
 
-          {isRegister && (
-            <div className="form-group">
-              <label className="form-label" htmlFor="phone">
-                Mobile Number
-              </label>
-              <div style={{ position: 'relative' }}>
-                <Phone size={18} style={{
-                  position: 'absolute',
-                  left: '12px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  color: 'var(--text-muted)'
-                }} />
-                <input
-                  id="phone"
-                  type="text"
-                  className="form-input"
-                  style={{ paddingLeft: '2.5rem', width: '100%' }}
-                  placeholder="+15550000"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-              </div>
+          {error && (
+            <div className="auth-alert auth-alert-error">
+              <AlertTriangle size={18} style={{ flexShrink: 0 }} />
+              <span>{error}</span>
             </div>
           )}
 
-          {!useOtp && !isForgotPassword && (
-            <>
+          {success && (
+            <div className="auth-alert auth-alert-success">
+              <CheckCircle2 size={18} style={{ flexShrink: 0 }} />
+              <span>{success}</span>
+            </div>
+          )}
+
+          {/* Demo OTP Helper Box */}
+          {(useOtp || isForgotPassword) && otpStep === 2 && demoOtp && (
+            <div className="auth-demo-otp">
+              <span style={{ color: 'var(--text-muted)' }}>Demo Verification Code:</span>
+              <strong>{demoOtp}</strong>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="auth-form">
+            {isRegister && (
               <div className="form-group">
-                <label className="form-label" htmlFor="email">
-                  Email Address
+                <label className="form-label" htmlFor="name">
+                  Full Name
                 </label>
-                <div style={{ position: 'relative' }}>
-                  <Mail size={18} style={{
-                    position: 'absolute',
-                    left: '12px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    color: 'var(--text-muted)'
-                  }} />
+                <div className="input-shell">
+                  <User size={18} className="input-icon" />
                   <input
-                    id="email"
-                    type="email"
+                    id="name"
+                    type="text"
                     className="form-input"
-                    style={{ paddingLeft: '2.5rem', width: '100%' }}
-                    placeholder="name@company.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="John Doe"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     required
                   />
                 </div>
               </div>
+            )}
 
+            {isRegister && (
               <div className="form-group">
-                <label className="form-label" htmlFor="password">
-                  Password
+                <label className="form-label" htmlFor="phone">
+                  Mobile Number
                 </label>
-                <div style={{ position: 'relative' }}>
-                  <KeyRound size={18} style={{
-                    position: 'absolute',
-                    left: '12px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    color: 'var(--text-muted)'
-                  }} />
+                <div className="input-shell">
+                  <Phone size={18} className="input-icon" />
                   <input
-                    id="password"
-                    type={showPassword ? 'text' : 'password'}
+                    id="phone"
+                    type="text"
                     className="form-input"
-                    style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem', width: '100%' }}
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="+15550000"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </div>
+              </div>
+            )}
+
+            {!useOtp && !isForgotPassword && (
+              <>
+                <div className="form-group">
+                  <label className="form-label" htmlFor="email">
+                    Email Address
+                  </label>
+                  <div className="input-shell">
+                    <Mail size={18} className="input-icon" />
+                    <input
+                      id="email"
+                      type="email"
+                      className="form-input"
+                      placeholder="name@company.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor="password">
+                    Password
+                  </label>
+                  <div className="input-shell">
+                    <KeyRound size={18} className="input-icon" />
+                    <input
+                      id="password"
+                      type={showPassword ? 'text' : 'password'}
+                      className="form-input"
+                      placeholder="••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="input-ghost-button"
+                    >
+                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                  <div className="form-row-end">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsForgotPassword(true);
+                        setIsRegister(false);
+                        setUseOtp(false);
+                        setOtpStep(1);
+                        setIdentifier('');
+                        setOtpCode('');
+                        setPassword('');
+                        setDemoOtp(null);
+                        setError(null);
+                        setSuccess(null);
+                      }}
+                      className="link-button"
+                    >
+                      Forgot Password?
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {/* Reset Request Input identifier */}
+            {isForgotPassword && otpStep === 1 && (
+              <div className="form-group animate-slide-up">
+                <label className="form-label" htmlFor="identifier">
+                  Email Address or Mobile Number
+                </label>
+                <div className="input-shell">
+                  <Mail size={18} className="input-icon" />
+                  <input
+                    id="identifier"
+                    type="text"
+                    className="form-input"
+                    placeholder="name@company.com or +15550001"
+                    value={identifier}
+                    onChange={(e) => setIdentifier(e.target.value)}
                     required
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    style={{
-                      position: 'absolute',
-                      right: '12px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      background: 'none',
-                      border: 'none',
-                      color: 'var(--text-muted)',
-                      cursor: 'pointer',
-                      padding: '0.2rem',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                  </button>
-                </div>
-                
-                {/* Forgot Password Link */}
-                <div style={{ textAlign: 'right', marginTop: '0.45rem' }}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsForgotPassword(true);
-                      setIsRegister(false);
-                      setUseOtp(false);
-                      setOtpStep(1);
-                      setIdentifier('');
-                      setOtpCode('');
-                      setPassword('');
-                      setDemoOtp(null);
-                      setError(null);
-                      setSuccess(null);
-                    }}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      color: '#a5b4fc',
-                      fontSize: '0.75rem',
-                      cursor: 'pointer',
-                      fontWeight: 500,
-                      padding: 0
-                    }}
-                  >
-                    Forgot Password?
-                  </button>
                 </div>
               </div>
-            </>
-          )}
+            )}
 
-          {/* Reset Request Input identifier */}
-          {isForgotPassword && otpStep === 1 && (
-            <div className="form-group animate-slide-up">
-              <label className="form-label" htmlFor="identifier">
-                Email Address or Mobile Number
-              </label>
-              <div style={{ position: 'relative' }}>
-                <Mail size={18} style={{
-                  position: 'absolute',
-                  left: '12px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  color: 'var(--text-muted)'
-                }} />
-                <input
-                  id="identifier"
-                  type="text"
-                  className="form-input"
-                  style={{ paddingLeft: '2.5rem', width: '100%' }}
-                  placeholder="name@company.com or +15550001"
-                  value={identifier}
-                  onChange={(e) => setIdentifier(e.target.value)}
-                  required
-                />
+            {/* Reset OTP entry and New Password input */}
+            {isForgotPassword && otpStep === 2 && (
+              <div className="form-group animate-slide-up auth-step-stack">
+                <div>
+                  <label className="form-label" htmlFor="otpCode">
+                    Enter Reset OTP Code
+                  </label>
+                  <div className="input-shell">
+                    <Key size={18} className="input-icon" />
+                    <input
+                      id="otpCode"
+                      type="text"
+                      maxLength={6}
+                      className="form-input"
+                      placeholder="000000"
+                      value={otpCode}
+                      onChange={(e) => setOtpCode(e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="form-label" htmlFor="newPassword">
+                    Enter New Password
+                  </label>
+                  <div className="input-shell">
+                    <KeyRound size={18} className="input-icon" />
+                    <input
+                      id="newPassword"
+                      type={showPassword ? 'text' : 'password'}
+                      className="form-input"
+                      placeholder="••••••••"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="input-ghost-button"
+                    >
+                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {/* Reset OTP entry and New Password input */}
-          {isForgotPassword && otpStep === 2 && (
-            <div className="form-group animate-slide-up" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <div>
+            {useOtp && otpStep === 1 && (
+              <div className="form-group animate-slide-up">
+                <label className="form-label" htmlFor="identifier">
+                  Email Address or Mobile Number
+                </label>
+                <div className="input-shell">
+                  <Mail size={18} className="input-icon" />
+                  <input
+                    id="identifier"
+                    type="text"
+                    className="form-input"
+                    placeholder="manager@keystone.com or +15550001"
+                    value={identifier}
+                    onChange={(e) => setIdentifier(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+            )}
+
+            {useOtp && otpStep === 2 && (
+              <div className="form-group animate-slide-up">
                 <label className="form-label" htmlFor="otpCode">
-                  Enter Reset OTP Code
+                  Enter Verification Code (OTP)
                 </label>
-                <div style={{ position: 'relative' }}>
-                  <Key size={18} style={{
-                    position: 'absolute',
-                    left: '12px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    color: 'var(--text-muted)'
-                  }} />
+                <div className="input-shell">
+                  <Key size={18} className="input-icon" />
                   <input
                     id="otpCode"
                     type="text"
                     maxLength={6}
                     className="form-input"
-                    style={{ paddingLeft: '2.5rem', width: '100%', letterSpacing: '0.15em', fontWeight: 700 }}
                     placeholder="000000"
                     value={otpCode}
                     onChange={(e) => setOtpCode(e.target.value)}
                     required
                   />
                 </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOtpStep(1);
+                    setSuccess(null);
+                    setError(null);
+                  }}
+                  className="link-button"
+                >
+                  Change Email / Mobile Number
+                </button>
               </div>
+            )}
 
-              <div>
-                <label className="form-label" htmlFor="newPassword">
-                  Enter New Password
+            {isRegister && (
+              <div className="form-group">
+                <label className="form-label" htmlFor="role">
+                  Select Role
                 </label>
-                <div style={{ position: 'relative' }}>
-                  <KeyRound size={18} style={{
-                    position: 'absolute',
-                    left: '12px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    color: 'var(--text-muted)'
-                  }} />
-                  <input
-                    id="newPassword"
-                    type={showPassword ? 'text' : 'password'}
-                    className="form-input"
-                    style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem', width: '100%' }}
-                    placeholder="••••••••"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    style={{
-                      position: 'absolute',
-                      right: '12px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      background: 'none',
-                      border: 'none',
-                      color: 'var(--text-muted)',
-                      cursor: 'pointer',
-                      padding: '0.2rem',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                  >
-                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {useOtp && otpStep === 1 && (
-            <div className="form-group animate-slide-up">
-              <label className="form-label" htmlFor="identifier">
-                Email Address or Mobile Number
-              </label>
-              <div style={{ position: 'relative' }}>
-                <Mail size={18} style={{
-                  position: 'absolute',
-                  left: '12px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  color: 'var(--text-muted)'
-                }} />
-                <input
-                  id="identifier"
-                  type="text"
+                <select
+                  id="role"
                   className="form-input"
-                  style={{ paddingLeft: '2.5rem', width: '100%' }}
-                  placeholder="manager@keystone.com or +15550001"
-                  value={identifier}
-                  onChange={(e) => setIdentifier(e.target.value)}
+                  value={role}
+                  onChange={(e) => setRole(e.target.value)}
                   required
-                />
+                >
+                  <option value="CUSTOMER">Customer (Site Owner)</option>
+                  <option value="TECHNICIAN">Technician (Field Specialist)</option>
+                  <option value="DISPATCHER">Dispatcher (Scheduler)</option>
+                  <option value="MANAGER">Manager (Administrator)</option>
+                </select>
+                {role === 'MANAGER' && (
+                  <p style={{ fontSize: '0.75rem', color: '#fb7185', marginTop: '0.25rem' }}>
+                    * Limit of 5 Manager accounts maximum.
+                  </p>
+                )}
               </div>
-            </div>
-          )}
+            )}
 
-          {useOtp && otpStep === 2 && (
-            <div className="form-group animate-slide-up">
-              <label className="form-label" htmlFor="otpCode">
-                Enter Verification Code (OTP)
-              </label>
-              <div style={{ position: 'relative' }}>
-                <Key size={18} style={{
-                  position: 'absolute',
-                  left: '12px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  color: 'var(--text-muted)'
-                }} />
-                <input
-                  id="otpCode"
-                  type="text"
-                  maxLength={6}
-                  className="form-input"
-                  style={{ paddingLeft: '2.5rem', width: '100%', letterSpacing: '0.15em', fontWeight: 700 }}
-                  placeholder="000000"
-                  value={otpCode}
-                  onChange={(e) => setOtpCode(e.target.value)}
-                  required
-                />
-              </div>
+            <button type="submit" className="btn btn-primary auth-submit" disabled={loading}>
+              {loading ? 'Processing...' : (
+                isForgotPassword ? (otpStep === 1 ? 'Send Reset Code' : 'Reset & Save Password') : (
+                  isRegister ? 'Create Account' : (
+                    useOtp ? (otpStep === 1 ? 'Send OTP Code' : 'Verify & Sign In') : 'Sign In'
+                  )
+                )
+              )}
+            </button>
+            
+            {/* Back button for Forgot Password view */}
+            {isForgotPassword && (
               <button
                 type="button"
-                onClick={() => {
-                  setOtpStep(1);
-                  setSuccess(null);
-                  setError(null);
-                }}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  color: '#818cf8',
-                  fontSize: '0.75rem',
-                  cursor: 'pointer',
-                  padding: '0.25rem 0',
-                  marginTop: '0.5rem'
-                }}
+                className="btn btn-secondary auth-back-button"
+                onClick={resetAllTabs}
               >
-                Change Email / Mobile Number
+                Back to Login
               </button>
-            </div>
-          )}
-
-          {isRegister && (
-            <div className="form-group">
-              <label className="form-label" htmlFor="role">
-                Select Role
-              </label>
-              <select
-                id="role"
-                className="form-input"
-                style={{ width: '100%' }}
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                required
-              >
-                <option value="CUSTOMER">Customer (Site Owner)</option>
-                <option value="TECHNICIAN">Technician (Field Specialist)</option>
-                <option value="DISPATCHER">Dispatcher (Scheduler)</option>
-                <option value="MANAGER">Manager (Administrator)</option>
-              </select>
-              {role === 'MANAGER' && (
-                <p style={{ fontSize: '0.75rem', color: '#fb7185', marginTop: '0.25rem' }}>
-                  * Limit of 5 Manager accounts maximum.
-                </p>
-              )}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            className="btn btn-primary"
-            style={{ width: '100%', marginTop: '1rem', height: '48px' }}
-            disabled={loading}
-          >
-            {loading ? 'Processing...' : (
-              isForgotPassword ? (otpStep === 1 ? 'Send Reset Code' : 'Reset & Save Password') : (
-                isRegister ? 'Create Account' : (
-                  useOtp ? (otpStep === 1 ? 'Send OTP Code' : 'Verify & Sign In') : 'Sign In'
-                )
-              )
             )}
-          </button>
-          
-          {/* Back button for Forgot Password view */}
-          {isForgotPassword && (
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={resetAllTabs}
-              style={{ width: '100%', marginTop: '0.5rem', height: '40px', justifyContent: 'center' }}
-            >
-              Back to Login
-            </button>
-          )}
-        </form>
+          </form>
 
-        {!isRegister && !isForgotPassword && (
-          <div style={{ marginTop: '2.25rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: '1.5rem' }}>
-            <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '0.75rem' }}>
-              Quick Login Demo Accounts
-            </span>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
-              <button
-                onClick={() => handleQuickLogin('manager@keystone.com')}
-                className="btn btn-secondary"
-                style={{ fontSize: '0.75rem', padding: '0.5rem', display: 'flex', justifyContent: 'flex-start', gap: '0.25rem' }}
-              >
-                <Play size={10} style={{ color: '#6366f1' }} />
-                <span>Manager</span>
-              </button>
-              <button
-                onClick={() => handleQuickLogin('dispatcher@keystone.com')}
-                className="btn btn-secondary"
-                style={{ fontSize: '0.75rem', padding: '0.5rem', display: 'flex', justifyContent: 'flex-start', gap: '0.25rem' }}
-              >
-                <Play size={10} style={{ color: '#38bdf8' }} />
-                <span>Dispatcher</span>
-              </button>
-              <button
-                onClick={() => handleQuickLogin('tech1@keystone.com')}
-                className="btn btn-secondary"
-                style={{ fontSize: '0.75rem', padding: '0.5rem', display: 'flex', justifyContent: 'flex-start', gap: '0.25rem' }}
-              >
-                <Play size={10} style={{ color: '#fb7185' }} />
-                <span>Technician</span>
-              </button>
-              <button
-                onClick={() => handleQuickLogin('customer@keystone.com')}
-                className="btn btn-secondary"
-                style={{ fontSize: '0.75rem', padding: '0.5rem', display: 'flex', justifyContent: 'flex-start', gap: '0.25rem' }}
-              >
-                <Play size={10} style={{ color: '#34d399' }} />
-                <span>Customer</span>
-              </button>
+          {!isRegister && !isForgotPassword && (
+            <div className="auth-demo-section">
+              <span className="auth-demo-label">Quick Login Demo Accounts</span>
+              <div className="auth-demo-grid">
+                <button
+                  onClick={() => handleQuickLogin('manager@keystone.com')}
+                  className="demo-card"
+                >
+                  <Play size={12} style={{ color: '#6366f1' }} />
+                  <span>Manager</span>
+                </button>
+                <button
+                  onClick={() => handleQuickLogin('dispatcher@keystone.com')}
+                  className="demo-card"
+                >
+                  <Play size={12} style={{ color: '#38bdf8' }} />
+                  <span>Dispatcher</span>
+                </button>
+                <button
+                  onClick={() => handleQuickLogin('tech1@keystone.com')}
+                  className="demo-card"
+                >
+                  <Play size={12} style={{ color: '#fb7185' }} />
+                  <span>Technician</span>
+                </button>
+                <button
+                  onClick={() => handleQuickLogin('customer@keystone.com')}
+                  className="demo-card"
+                >
+                  <Play size={12} style={{ color: '#34d399' }} />
+                  <span>Customer</span>
+                </button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </section>
       </div>
     </div>
   );

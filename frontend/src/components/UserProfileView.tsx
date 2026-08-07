@@ -130,8 +130,8 @@ export default function UserProfileView({ token, onProfileUpdated }: UserProfile
             position: 'absolute',
             top: 0, left: 0, right: 0,
             height: '100px',
-            background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(56, 189, 248, 0.1) 100%)',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.05)',
+            background: 'linear-gradient(135deg, rgba(124, 140, 255, 0.16) 0%, rgba(25, 195, 125, 0.08) 100%)',
+            borderBottom: '1px solid rgba(15, 23, 42, 0.06)',
             zIndex: 0
           }} />
 
@@ -144,15 +144,15 @@ export default function UserProfileView({ token, onProfileUpdated }: UserProfile
                   <img 
                     src={profile.avatarUrl} 
                     alt="Avatar" 
-                    style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover', border: '3px solid var(--primary)', boxShadow: '0 0 15px rgba(99, 102, 241, 0.3)' }}
+                    style={{ width: '100px', height: '100px', borderRadius: '50%', objectFit: 'cover', border: '3px solid var(--primary)', boxShadow: '0 0 15px rgba(99, 102, 241, 0.18)' }}
                   />
                 ) : (
                   <div style={{ 
                     width: '100px', height: '100px', borderRadius: '50%', 
-                    background: 'var(--primary)', color: '#ffffff', 
+                    background: 'linear-gradient(135deg, #7c8cff 0%, #9b7bff 100%)', color: '#ffffff', 
                     display: 'flex', alignItems: 'center', justifyContent: 'center', 
-                    fontSize: '2rem', fontWeight: 800, border: '3px solid rgba(255, 255, 255, 0.1)',
-                    boxShadow: '0 0 15px rgba(99, 102, 241, 0.3)'
+                    fontSize: '2rem', fontWeight: 800, border: '3px solid rgba(15, 23, 42, 0.08)',
+                    boxShadow: '0 0 15px rgba(99, 102, 241, 0.18)'
                   }}>
                     {defaultInitials}
                   </div>
@@ -163,7 +163,7 @@ export default function UserProfileView({ token, onProfileUpdated }: UserProfile
               <div style={{ flex: 1 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <h2 style={{ fontSize: '1.6rem', fontWeight: 700 }}>{profile?.name}</h2>
-                  <span className="badge" style={{ fontSize: '0.7rem', padding: '0.2rem 0.6rem', background: 'rgba(99, 102, 241, 0.15)', color: '#a5b4fc', textTransform: 'uppercase', fontWeight: 700 }}>
+                  <span className="badge" style={{ fontSize: '0.7rem', padding: '0.2rem 0.6rem', background: 'rgba(124, 140, 255, 0.12)', color: '#4f46e5', textTransform: 'uppercase', fontWeight: 700 }}>
                     {profile?.role?.replace('_', ' ')}
                   </span>
                 </div>
@@ -188,7 +188,7 @@ export default function UserProfileView({ token, onProfileUpdated }: UserProfile
 
             {/* Edit Form */}
             {isEditing && (
-              <form onSubmit={handleSave} className="animate-slide-up" style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '1.5rem' }}>
+              <form onSubmit={handleSave} className="animate-slide-up" style={{ borderTop: '1px solid rgba(15,23,42,0.08)', paddingTop: '1.5rem' }}>
                 <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', fontWeight: 600 }}>Update Profile Details</h3>
                 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
