@@ -45,6 +45,7 @@ public class WorkOrderServiceTest {
         );
     }
 
+    @SuppressWarnings("null")
     @Test
     public void testValidStatusTransition_NewToAssigned() {
         when(workOrderRepository.findById(100L)).thenReturn(Optional.of(testWorkOrder));
@@ -52,7 +53,12 @@ public class WorkOrderServiceTest {
         WorkOrder updated = workOrderService.transitionStatus(100L, Status.ASSIGNED, "Assigning", dispatcherUser);
 
         assertEquals(Status.ASSIGNED, updated.getStatus());
-        verify(workOrderRepository, times(1)).save(testWorkOrder);
+        final WorkOrder testWorkOrder2 = testWorkOrder;
+        if (testWorkOrder2 != null) {
+            verify(workOrderRepository, times(1)).save(testWorkOrder2);
+        } else {
+            // TODO handle null value
+        }
         verify(historyRepository, times(1)).save(any(WorkOrderStatusHistory.class));
     }
 

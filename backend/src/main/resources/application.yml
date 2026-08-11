@@ -1,20 +1,24 @@
 spring:
   profiles:
     active: dev
+
   application:
     name: keystone
 
 ---
-# Dev Profile: Zero-setup local development using H2 in PostgreSQL compatibility mode
+
+# Dev Profile: Zero-setup local development using H2
 spring:
   config:
     activate:
       on-profile: dev
+
   datasource:
     url: jdbc:h2:file:./postgres-data/keystonedb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE
     driver-class-name: org.h2.Driver
     username: sa
     password: password
+
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
@@ -23,49 +27,56 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
   flyway:
     enabled: true
     clean-disabled: false
 
-# JWT Configurations for Dev
+# JWT Configuration for Dev
 security:
   jwt:
-    secret: 9a4f981859755609b40094ec200908f981a4f981859755609b40094ec200908f981a4f981859755609b40094ec200908f
-    expiration-ms: 86400000 # 24 Hours
+    secret: 9a4f981859755609b40094ec200908f981a4f981859755609b40094ec200908f
+    expiration-ms: 86400000
 
-# Server port
+# Server
 server:
   port: 8080
 
+# Logging
 logging:
   level:
     org.springframework.security: DEBUG
     org.hibernate.SQL: DEBUG
 
 ---
-# Postgres Profile: Connects to a running PostgreSQL instance (Local or Docker)
+
+# PostgreSQL Profile
 spring:
   config:
     activate:
       on-profile: postgres
+
   datasource:
     url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:keystone}
     username: ${DB_USER:postgres}
     password: ${DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
+
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: validate
     show-sql: false
+
   flyway:
     enabled: true
 
-# JWT Configurations for Postgres
+# JWT Configuration for PostgreSQL
 security:
   jwt:
-    secret: ${JWT_SECRET:9a4f981859755609b40094ec200908f981a4f981859755609b40094ec200908f981a4f981859755609b40094ec200908f981a4f981859755609b40094ec200908f}
+    secret: ${JWT_SECRET:9a4f981859755609b40094ec200908f981a4f981859755609b40094ec200908f}
     expiration-ms: ${JWT_EXPIRATION_MS:86400000}
 
+# Server
 server:
   port: 8080

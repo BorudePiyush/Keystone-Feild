@@ -1,0 +1,18 @@
+
+The following files have been resolved:
+   org.springframework.boot:spring-boot-starter-actuator:jar:3.3.1:compile[36m -- module spring.boot.starter.actuator[0;1m [auto][m
+   org.springframework.boot:spring-boot-starter-web:jar:3.3.1:compile[36m -- module spring.boot.starter.web[0;1m [auto][m
+   org.springframework.boot:spring-boot-starter-data-jpa:jar:3.3.1:compile[36m -- module spring.boot.starter.data.jpa[0;1m [auto][m
+   org.springframework.boot:spring-boot-starter-security:jar:3.3.1:compile[36m -- module spring.boot.starter.security[0;1m [auto][m
+   org.springframework.boot:spring-boot-starter-validation:jar:3.3.1:compile[36m -- module spring.boot.starter.validation[0;1m [auto][m
+   org.postgresql:postgresql:jar:42.7.3:runtime[36m -- module org.postgresql.jdbc[0;1m [auto][m
+   com.h2database:h2:jar:2.2.224:runtime[36m -- module com.h2database[0;1m [auto][m
+   org.flywaydb:flyway-core:jar:10.10.0:compile[36m -- module flyway.core[0;1;33m (auto)[m
+   org.flywaydb:flyway-database-postgresql:jar:10.10.0:compile[36m -- module flyway.database.postgresql[0;1;33m (auto)[m
+   io.jsonwebtoken:jjwt-api:jar:0.12.5:compile[36m -- module jjwt.api[0;1;33m (auto)[m
+   io.jsonwebtoken:jjwt-impl:jar:0.12.5:runtime[36m -- module jjwt.impl[0;1;33m (auto)[m
+   io.jsonwebtoken:jjwt-jackson:jar:0.12.5:runtime[36m -- module jjwt.jackson[0;1;33m (auto)[m
+   org.springdoc:springdoc-openapi-starter-webmvc-ui:jar:2.5.0:compile[36m -- module org.springdoc.openapi.ui[0;1m [auto][m
+   org.springframework.boot:spring-boot-starter-test:jar:3.3.1:test[36m -- module spring.boot.starter.test[0;1m [auto][m
+   org.springframework.security:spring-security-test:jar:6.3.1:test[36m -- module spring.security.test[0;1m [auto][m
+
