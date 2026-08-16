@@ -13,6 +13,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -34,31 +35,82 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+
             .csrf(csrf -> csrf.disable())
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+            .sessionManagement(session ->
+                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
+
             .authorizeHttpRequests(auth -> auth
+
+                // Authentication endpoints
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+
+                // Swagger / OpenAPI
+                .requestMatchers(
+                    "/v3/api-docs/**",
+                    "/swagger-ui/**",
+                    "/swagger-ui.html"
+                ).permitAll()
+
+                // Actuator health check
+                .requestMatchers("/actuator/health").permitAll()
+
+                // Everything else requires authentication
                 .anyRequest().authenticated()
             )
-            .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+
+            .addFilterBefore(
+                jwtTokenFilter,
+                UsernamePasswordAuthenticationFilter.class
+            );
 
         return http.build();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
+
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Cache-Control"));
-        configuration.setExposedHeaders(Collections.singletonList("Authorization"));
+
+        configuration.setAllowedOrigins(
+            Collections.singletonList("http://localhost:5173")
+        );
+
+        configuration.setAllowedMethods(
+            Arrays.asList(
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE",
+                "OPTIONS"
+            )
+        );
+
+        configuration.setAllowedHeaders(
+            Arrays.asList(
+                "Authorization",
+                "Content-Type",
+                "Cache-Control"
+            )
+        );
+
+        configuration.setExposedHeaders(
+            Collections.singletonList("Authorization")
+        );
+
         configuration.setAllowCredentials(true);
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        UrlBasedCorsConfigurationSource source =
+            new UrlBasedCorsConfigurationSource();
+
         source.registerCorsConfiguration("/**", configuration);
+
         return source;
     }
 }
