@@ -1,6 +1,6 @@
 # KEYSTONE 🛠️ - Field Service & Operations Management Platform
 
-[![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
+[![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://www.oracle.com/java/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.3.1-brightgreen.svg)](https://spring.io/projects/spring-boot)
 [![React](https://img.shields.io/badge/React-18-blue.svg)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue)](https://www.typescriptlang.org/)
@@ -54,7 +54,7 @@
 
 ### Backend Infrastructure
 
-- **Framework:** Spring Boot 3.3.1 (Java 21)
+- **Framework:** Spring Boot 3.3.1 (Java 25)
 - **Security:** Spring Security with Stateless JWT Authentication & BCrypt Password Hashing
 - **ORM & Data Access:** Spring Data JPA / Hibernate (with `EAGER` entity fetching for Jackson JSON serialization safety)
 - **Database Migrations:** Flyway Schema Versioning
@@ -85,7 +85,7 @@ The application comes pre-seeded with sample role accounts. You can log in using
 
 ### Prerequisites
 
-- **Java Development Kit (JDK 21+)** installed. The Windows launcher pins the bundled backend to `C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot`.
+- **Java Development Kit (JDK 25+)** installed. The Windows launcher pins the bundled backend to `C:\Users\borud\AppData\Local\jdks\jdk-25.0.2`.
 - **Node.js (v18+)** and **npm** installed.
 
 ---
