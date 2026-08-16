@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  # ==========================================
+  # Database Service (PostgreSQL 16)
+  # ==========================================
+  db:
+    image: postgres:16-alpine
+    container_name: keystone_db
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME:-keystone}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres_secure_password_2026}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres} -d ${DB_NAME:-keystone}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ==========================================
+  # Backend Service (Spring Boot 3.3 Java 21)
+  # ==========================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: keystone_backend
+    restart: always
+    environment:
+      SPRING_PROFILES_ACTIVE: postgres
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME:-keystone}
+      DB_USER: ${DB_USER:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-postgres_secure_password_2026}
+      JWT_SECRET: ${JWT_SECRET:-9a4f981859755609b40094ec200908f981a4f981859755609b40094ec200908f}
+      JWT_EXPIRATION_MS: ${JWT_EXPIRATION_MS:-86400000}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost,http://localhost:80,http://localhost:5173}
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # ==========================================
+  # Frontend Service (React + Nginx)
+  # ==========================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: keystone_frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+    driver: local

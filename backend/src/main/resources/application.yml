@@ -77,6 +77,9 @@ security:
     secret: ${JWT_SECRET:9a4f981859755609b40094ec200908f981a4f981859755609b40094ec200908f}
     expiration-ms: ${JWT_EXPIRATION_MS:86400000}
 
+cors:
+  allowed-origins: ${ALLOWED_ORIGINS:http://localhost:5173,http://localhost:3000,http://localhost:8080}
+
 # Server
 server:
-  port: 8080
+  port: ${PORT:8080}
